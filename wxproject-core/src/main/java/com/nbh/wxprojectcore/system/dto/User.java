@@ -5,15 +5,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nbh.wxprojectcore.base.BaseDTO;
 import com.nbh.wxprojectcore.util.Dates;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Table(name="SYS_USER")
 public class User  extends BaseDTO {
     private static final long serialVersionUID = -7395431342743009038L;
 
     /**
      * 用户ID
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OrderBy("DESC")
     private Long userId;
     /**
      * 用户名
