@@ -39,7 +39,7 @@ public class UserController extends BaseController {
     @PostMapping("/sys/user/queryAll")
     public Result queryAll(){
         List<User> list = userService.selectAll();
-        return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.description());
+        return Results.successWithData(list, BaseEnums.SUCCESS.code(), BaseEnums.SUCCESS.desc());
     }
 
     @RequestMapping("/sys/user/queryOne/{userId}")

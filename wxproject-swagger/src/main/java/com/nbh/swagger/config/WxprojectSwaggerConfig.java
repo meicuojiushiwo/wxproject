@@ -1,6 +1,9 @@
 package com.nbh.swagger.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @version 1.0
@@ -8,7 +11,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableSwagger2Doc
-public class WxprojectSwaggerConfig {
+@PropertySource(value = "classpath:application-swagger.properties")
+public class WxprojectSwaggerConfig extends WebMvcConfigurerAdapter {
     /**
      * 注入swagger资源文件
      */
