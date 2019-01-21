@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--<version>1.5.19.RELEASE</version>-->
+        <!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+    <!--</parent>-->
+    <!--<groupId>com.nbh</groupId>-->
+    <!--<artifactId>wxproject-stater</artifactId>-->
+    <!--<version>0.0.1-SNAPSHOT</version>-->
+    <!--<name>wxproject-stater</name>-->
+    <!--<description>Demo project for Spring Boot</description>-->
+
+    <!--<properties>-->
+        <!--<java.version>1.8</java.version>-->
+    <!--</properties>-->
+
+    <!--<dependencies>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-test</artifactId>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+    <!--</dependencies>-->
+
+
+
+
+    <parent>
+        <groupId>com.nbh</groupId>
+        <artifactId>wxproject</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.nbh</groupId>
+    <artifactId>wxproject-stater</artifactId>
+    <packaging>jar</packaging>
+
+    <name>wxproject-stater</name>
+    <description>wxproject Parent</description>
+
+    <dependencies>
+        <!-- core -->
+        <dependency>
+            <groupId>com.nbh</groupId>
+            <artifactId>wxproject-core</artifactId>
+            <version>${wxproject.version}</version>
+        </dependency>
+        <!-- cache -->
+        <dependency>
+            <groupId>com.nbh</groupId>
+            <artifactId>wxproject-cache</artifactId>
+            <version>${wxproject.version}</version>
+        </dependency>
+        <!-- security -->
+        <dependency>
+            <groupId>com.nbh</groupId>
+            <artifactId>wxproject-security</artifactId>
+            <version>${wxproject.version}</version>
+        </dependency>
+        <!-- admin -->
+        <dependency>
+            <groupId>com.nbh</groupId>
+            <artifactId>wxproject-admin</artifactId>
+            <version>${wxproject.version}</version>
+        </dependency>
+        <!-- swagger -->
+        <dependency>
+            <groupId>com.nbh</groupId>
+            <artifactId>wxproject-swagger</artifactId>
+            <version>${wxproject.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
