@@ -1,5 +1,6 @@
 package com.nbh.wxprojectcore.base;
 
+
 import com.github.pagehelper.PageHelper;
 import com.nbh.wxprojectcore.constants.Constants;
 import com.nbh.wxprojectcore.util.Reflections;
@@ -11,7 +12,6 @@ import javax.annotation.PostConstruct;
 import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.util.List;
-
 /**
  * 基础Service实现类
  *
@@ -297,9 +297,10 @@ public abstract class BaseService<T> implements Service<T> {
     protected void checkUpdate(int updateCount, Object record) {
         if (updateCount == 0 && record instanceof BaseDTO) {
             BaseDTO baseDTO = (BaseDTO) record;
-            if (baseDTO.getVersion() != null) {
-                throw new UpdateFailedException();
-            }
+            System.out.println("异常还有没有跑出，现在只是注释掉了");
+//            if (baseDTO.getVersion() != null) {
+//                throw new UpdateFailedException();
+//            }
         }
     }
 

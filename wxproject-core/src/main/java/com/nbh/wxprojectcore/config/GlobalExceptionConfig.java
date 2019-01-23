@@ -2,6 +2,7 @@ package com.nbh.wxprojectcore.config;
 
 import com.nbh.wxprojectcore.base.Result;
 import com.nbh.wxprojectcore.constants.BaseEnums;
+import com.nbh.wxprojectcore.exception.AuthorityException;
 import com.nbh.wxprojectcore.exception.BaseException;
 import com.nbh.wxprojectcore.exception.ServiceException;
 import com.nbh.wxprojectcore.util.Results;

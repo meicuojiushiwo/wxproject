@@ -9,6 +9,8 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+
 /**
  * Redis配置.
  *
