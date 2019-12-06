@@ -1,0 +1,6 @@
+2019-11-27
+确定使用vue框架
+2019-11-28
+1.安装Node.js，安装webpack vue-cli
+2.新建vue项目,探索使用
+3.配置idea环境，添加vue.js支持及新增vue文件中支持

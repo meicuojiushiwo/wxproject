@@ -42,6 +42,10 @@
         <module>wxproject-security</module>
         <module>wxproject-admin</module>
         <module>wxproject-swagger</module>
+        <module>wxproject-client</module>
+        <module>wxproject-client</module>
+        <module>wxproject-client</module>
+        <module>wxproject-client</module>
     </modules>
 
     <build>
