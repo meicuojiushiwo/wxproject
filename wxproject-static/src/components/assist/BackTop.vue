@@ -26,7 +26,7 @@
     }
 </script>
 
-<style scoped>
+<style module>
     .el-icon-caret-top{
         font-family:element-icons!important;
         speak:none;

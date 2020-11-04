@@ -1,36 +1,27 @@
 <template>
-  <div id="app">
-    <el-scrollbar class="el-scrollbar ">
-      <router-view/>
-    </el-scrollbar>
+  <div id="app" >
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-
+    export default {
+        components: {},
+        data(){
+            return{
+            }
+        }
+    }
 </script>
+
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 
 .el-header, .el-footer {
@@ -38,14 +29,12 @@
 }
 
 
-
-.el-scrollbar {
-  height: 100%;
-}
-
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
+  top: 2px;
+  opacity: 1;
+  transition: opacity .34s ease-out;
 }
 
 ::-webkit-scrollbar-thumb {

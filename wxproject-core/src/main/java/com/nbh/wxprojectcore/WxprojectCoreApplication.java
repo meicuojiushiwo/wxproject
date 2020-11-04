@@ -6,12 +6,14 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
-@PropertySource(value="classpath:application-core.properties")
+@PropertySource(value = "classpath:application-core.properties")
 public class WxprojectCoreApplication {
+
 
     public static void main(String[] args) {
         SpringApplication.run(WxprojectCoreApplication.class, args);
     }
+
 
 }
 

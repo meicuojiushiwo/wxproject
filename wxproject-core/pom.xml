@@ -68,6 +68,7 @@
             <artifactId>janino</artifactId>
             <version>${janino.version}</version>
         </dependency>
+
         <!--日志配置 end
 
         -->
@@ -108,10 +109,10 @@
         </dependency>
 
         <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid</artifactId>
-        <version>1.0.6</version>
-    </dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.6</version>
+        </dependency>
         <!--数据库配置 end -->
 
 

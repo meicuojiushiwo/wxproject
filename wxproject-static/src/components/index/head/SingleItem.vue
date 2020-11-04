@@ -17,7 +17,15 @@
 <script>
     export default {
         name: "SingleItem",
-        props: ["items"],
+        props: {
+            "items":{
+                type:Array, //String、Number、Boolean、Array、Object、Date、Function、Symbol、任何自定义构造函数、或上述内容组成的数组。会检查一个 prop 是否是给定的类型，否则抛出警告。
+                require:true,
+                // validator: function (value) {
+                //     return value >= []
+                // }
+            }
+        },
         data() {
             return {}
         },
@@ -39,6 +47,9 @@
 
 
 <style scoped>
+    .SingleItem{
+        display: inline;
+    }
     /* 水平样式 */
     .el-menu--horizontal>div>.el-submenu {
         float: left;
