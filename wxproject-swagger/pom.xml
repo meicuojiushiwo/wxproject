@@ -5,7 +5,6 @@
 
     <groupId>com.nbh</groupId>
     <artifactId>wxproject-swagger</artifactId>
-    <!--<version>1.8.0.RELEASE</version>-->
     <version>0.0.1-SNAPSHOT</version>
 
     <name>wxproject-swagger</name>
