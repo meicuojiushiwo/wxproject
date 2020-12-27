@@ -1,4 +1,4 @@
-package com.nbh.wxprojectclient.plugin.kafka;
+package com.nbh.wxprojectclient.plugin.kafka.dto;
 
 import lombok.Data;
 

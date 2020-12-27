@@ -1,23 +1,23 @@
 package com.nbh.wxprojectclient;
 
+import com.nbh.wxprojectclient.plugin.kafka.service.KafkaSendService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.kafka.core.KafkaProducerException;
-import org.springframework.kafka.core.KafkaSendCallback;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Slf4j
 @SpringBootApplication
 public class WxprojectClientApplication implements CommandLineRunner {
 
+
+//    @Autowired
+//    private KafkaTemplate stringTemplate;
+    @Autowired
+    private KafkaSendService kafkaSendService;
 
     public static void main(String[] args) {
 //        SpringApplication.run(WxprojectClientApplication.class, args);
@@ -33,8 +33,8 @@ public class WxprojectClientApplication implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-
-
+//        stringTemplate.sendDefault("testDefault");
+        kafkaSendService.test();
     }
 
     /**
