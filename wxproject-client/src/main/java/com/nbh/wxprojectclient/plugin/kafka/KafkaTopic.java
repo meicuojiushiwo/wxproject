@@ -6,7 +6,6 @@ import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.stereotype.Component;
-import plugin.kafka.KafkaConstant;
 
 /**
  * kafka主题创建类

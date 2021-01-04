@@ -1,7 +1,5 @@
-package plugin.kafka;
+package com.nbh.wxprojectcore.plugin.kafka;
 
-import com.alibaba.fastjson.parser.deserializer.JSONPDeserializer;
-import com.alibaba.fastjson.serializer.JSONSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

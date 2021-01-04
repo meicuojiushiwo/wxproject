@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>com.nbh</groupId>
-            <artifactId>wxproject-common</artifactId>
+            <artifactId>wxproject-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

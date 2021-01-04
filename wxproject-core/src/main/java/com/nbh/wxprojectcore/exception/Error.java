@@ -1,4 +1,4 @@
-package exception;
+package com.nbh.wxprojectcore.exception;
 
 import lombok.Data;
 

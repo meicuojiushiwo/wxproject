@@ -20,12 +20,6 @@ import java.util.List;
  * @version 1.0
  * @author bojiangzhou 2017-12-31
  */
-/**
- * 用户Controller
- *
- * @version 1.0
- * @author bojiangzhou 2017-12-31
- */
 @RequestMapping
 @RestController
 public class UserController extends BaseController {

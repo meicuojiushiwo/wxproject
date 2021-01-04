@@ -8,6 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @SpringBootApplication
@@ -34,8 +38,9 @@ public class WxprojectClientApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        stringTemplate.sendDefault("testDefault");
-        kafkaSendService.test();
+        kafkaSendService.test1();
     }
+
 
     /**
      * 消费数据

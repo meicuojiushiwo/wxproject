@@ -1,15 +1,13 @@
-package plugin.asyncHttp;
+package com.nbh.wxprojectcore.plugin.asyncHttp;
 
 import org.asynchttpclient.*;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.stream.Collectors;
 
 import static org.asynchttpclient.Dsl.asyncHttpClient;
 import static org.asynchttpclient.Dsl.config;

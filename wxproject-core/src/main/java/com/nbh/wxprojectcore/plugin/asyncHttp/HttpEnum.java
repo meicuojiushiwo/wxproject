@@ -1,4 +1,4 @@
-package plugin.asyncHttp;
+package com.nbh.wxprojectcore.plugin.asyncHttp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
