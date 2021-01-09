@@ -3,6 +3,7 @@ package com.nbh.wxprojectclient.plugin.kafka.service;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,25 @@ public class KafkaSendService<K, V> {
 
     @Autowired
     private KafkaTemplate stringTemplate;
+    @Autowired
+    private KafkaTemplate integerTemplate;
 
     @Transactional
     public void test1(){
-        stringTemplate.send("test",LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        stringTemplate.send("test","TEST"+LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
     }
+
+
+    @Transactional
+    public void test2(){
+        integerTemplate.send("test2",2, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+    }
+
+    @Transactional
+    public void test3(){
+        integerTemplate.send("test3",2, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+    }
+
 
 
 //    /**

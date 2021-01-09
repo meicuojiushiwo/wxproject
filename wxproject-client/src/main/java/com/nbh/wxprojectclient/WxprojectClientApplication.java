@@ -7,18 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @SpringBootApplication
 public class WxprojectClientApplication implements CommandLineRunner {
 
 
-//    @Autowired
+    //    @Autowired
 //    private KafkaTemplate stringTemplate;
     @Autowired
     private KafkaSendService kafkaSendService;
@@ -39,6 +34,8 @@ public class WxprojectClientApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        stringTemplate.sendDefault("testDefault");
         kafkaSendService.test1();
+        kafkaSendService.test2();
+        kafkaSendService.test3();
     }
 
 

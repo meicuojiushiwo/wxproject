@@ -1,6 +1,7 @@
 package com.nbh.wxprojectadmin.plugin.kafka;
 
 import com.alibaba.fastjson.JSON;
+import com.nbh.wxprojectcore.plugin.kafka.KafkaConstant;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.RoundRobinAssignor;
@@ -12,7 +13,6 @@ import org.asynchttpclient.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.ConversionException;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
@@ -21,14 +21,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ConsumerAwareRebalanceListener;
 import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.kafka.listener.adapter.ReplyHeadersConfigurer;
-import org.springframework.kafka.support.serializer.DeserializationException;
-import org.springframework.kafka.transaction.KafkaTransactionManager;
-import org.springframework.messaging.converter.MessageConversionException;
-import org.springframework.messaging.handler.invocation.MethodArgumentResolutionException;
-import org.springframework.util.backoff.FixedBackOff;
-import plugin.kafka.KafkaConstant;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -38,6 +31,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import static com.nbh.wxprojectadmin.plugin.kafka.KafkaConfig.BOOTSTRAP_SERVERS_CONFIG;
+import static com.nbh.wxprojectadmin.plugin.kafka.KafkaConfig.GROUP_ID_CONFIG;
 import static org.asynchttpclient.Dsl.asyncHttpClient;
 import static org.asynchttpclient.Dsl.config;
 
@@ -66,7 +61,8 @@ public class KafkaConsumerCreateFactory {
      */
     @Bean
     public <K, V> KafkaListenerContainerFactory batchKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory factory = (ConcurrentKafkaListenerContainerFactory) kafkaListenerContainerFactory();
+        ConcurrentKafkaListenerContainerFactory<K, V> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(getConsumerFactory(defaultConsumerConfigs()));
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
         // 批处理
         factory.setBatchListener(true);
@@ -160,8 +156,9 @@ public class KafkaConsumerCreateFactory {
      * 以下处理器不能与事务公用
      * 批量重试异常处理器（Retrying Batch Error Handler）
      * 批量恢复异常处理器（Recovering Batch Error Handler）
-     *
+     * <p>
      * 消费者消息记录消费的进行三次提交偏移量，如果三次提交失败则进入死信队列
+     *
      * @return
      */
 //    @Bean
@@ -180,8 +177,6 @@ public class KafkaConsumerCreateFactory {
 //        seekToCurrentErrorHandler.removeNotRetryableException(IllegalArgumentException.class);
 //        return seekToCurrentErrorHandler;
 //    }
-
-
     @Bean
     public ConsumerFactory getConsumerFactory(Map<String, Object> configMap) {
         DefaultKafkaConsumerFactory defaultKafkaConsumerFactory = new DefaultKafkaConsumerFactory<>(configMap);
@@ -191,26 +186,26 @@ public class KafkaConsumerCreateFactory {
     private Map<String, Object> defaultConsumerConfigs() {
         Map<String, Object> props = new HashMap<>();
         // 为每个主题的每个分区提供一个线程，搭配容器的Concurrency使用
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "admin");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.102:9092,192.168.0.106:9092,192.168.0.107:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID_CONFIG);
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS_CONFIG);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, KafkaConstant.SerializerType.STRING.getDeserializer());
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaConstant.SerializerType.STRING.getDeserializer());
         // 最小提取字节
         props.put(ConsumerConfig.FETCH_MIN_BYTES_CONFIG, 1);
-        // 最大分区提前字节
+//         最大分区提前字节
         props.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, 1 * 1024 * 1024);
-        // 心跳时间，30s一次，最好设置为session的三分之一
+//         心跳时间，30s一次，最好设置为session的三分之一
         props.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 30 * 60);
-        // session超时时间
+//         session超时时间
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 5 * 30 * 60);
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, KafkaConstant.AutoOffsetResetType.NONE.getCode());
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, KafkaConstant.AutoOffsetResetType.EARLIEST.getCode());
         props.put(ConsumerConfig.EXCLUDE_INTERNAL_TOPICS_CONFIG, true);
         props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, KafkaConstant.IsolationLevelType.READ_COMMITTED.getCode());
-        // 重平衡策略
-        // RoundRobinAssignor所有主题的所有分区重新平均分配到每消费者
-        // RangeAssignor对于所有主题来说，单个主题的的所有分区轮询分配给消费者
+//         重平衡策略
+//         RoundRobinAssignor所有主题的所有分区重新平均分配到每消费者
+//         RangeAssignor对于所有主题来说，单个主题的的所有分区轮询分配给消费者
         props.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, RoundRobinAssignor.class.getName());
-        // 停止自动提交
+//         停止自动提交
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         // See https://kafka.apache.org/documentation/#producerconfigs for more properties
         return props;

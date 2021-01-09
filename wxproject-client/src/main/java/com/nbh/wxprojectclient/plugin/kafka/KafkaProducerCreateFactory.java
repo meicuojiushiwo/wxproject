@@ -20,8 +20,36 @@ import static com.nbh.wxprojectclient.plugin.kafka.KafkaConfig.CLIENT_ID_CONFIG;
 public class KafkaProducerCreateFactory {
 
 
+    private final static String DEFAULT_TEMPLATE = "kafkaTemplate";
     private final static String STRING_TEMPLATE = "stringTemplate";
+    private final static String INTEGER_TEMPLATE = "integerTemplate";
     private final static String BYTES_TEMPLATE = "bytesTemplate";
+
+    /**
+     * 字符串数组生产者
+     *
+     * @return
+     */
+    @Bean(name = DEFAULT_TEMPLATE)
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        KafkaTemplate stringTemplate = getTemplate(null, null, null);
+        // 开启事务,注意从DefaultKafkaProducerFactory中过来的事务开启属性在构造template时会被移除掉，所以自定义template需要实现自己的事务前缀
+        stringTemplate.setTransactionIdPrefix(DEFAULT_TEMPLATE + CLIENT_ID_CONFIG);
+        return stringTemplate;
+    }
+
+    /**
+     * 字符串数组生产者
+     *
+     * @return
+     */
+    @Bean(name = INTEGER_TEMPLATE)
+    public KafkaTemplate<String, String> integerTemplate() {
+        KafkaTemplate stringTemplate = getTemplate(Integer.class, String.class, null);
+        // 开启事务,注意从DefaultKafkaProducerFactory中过来的事务开启属性在构造template时会被移除掉，所以自定义template需要实现自己的事务前缀
+        stringTemplate.setTransactionIdPrefix(INTEGER_TEMPLATE + CLIENT_ID_CONFIG);
+        return stringTemplate;
+    }
 
     /**
      * 字符串数组生产者
@@ -83,7 +111,7 @@ public class KafkaProducerCreateFactory {
 
     private Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.CLIENT_ID_CONFIG, CLIENT_ID_CONFIG);
+//        props.put(ProducerConfig.CLIENT_ID_CONFIG, CLIENT_ID_CONFIG);
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS_CONFIG);
         props.put(ProducerConfig.ACKS_CONFIG, KafkaConstant.AcksType.ALL.getCode());
         // 默认32兆
