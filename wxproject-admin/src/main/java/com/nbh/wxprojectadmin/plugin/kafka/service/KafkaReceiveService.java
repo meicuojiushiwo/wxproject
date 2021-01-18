@@ -4,6 +4,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.listener.adapter.ConsumerRecordMetadata;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -27,10 +28,10 @@ public class KafkaReceiveService {
 //            , errorHandler = "validationErrorHandler"
     )
     // sendTo的作用是把当前方法的结果转发给另外的topic，即使当前方法不存在返回值
-//    @SendTo("test")
-    public ConsumerRecordMetadata testListener(@Payload @Validated String dateStr) {
+    @SendTo("test2")
+    public String testListener(@Payload @Validated String dateStr) {
         System.out.println(dateStr);
-        return null;
+        return dateStr;
     }
 
     /**

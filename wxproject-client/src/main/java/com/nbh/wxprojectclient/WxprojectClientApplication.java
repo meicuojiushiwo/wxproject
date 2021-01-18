@@ -34,8 +34,8 @@ public class WxprojectClientApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        stringTemplate.sendDefault("testDefault");
         kafkaSendService.test1();
-        kafkaSendService.test2();
-        kafkaSendService.test3();
+//        kafkaSendService.test2();
+//        kafkaSendService.test3();
     }
 
 
