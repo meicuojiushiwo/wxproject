@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
 @Slf4j
 @SpringBootApplication
+@ImportResource(locations = {"classpath:com/nbh/wxprojectclient/plugin/dubbo/xml/*.xml"})
 public class WxprojectClientApplication implements CommandLineRunner {
 
 
@@ -17,10 +19,11 @@ public class WxprojectClientApplication implements CommandLineRunner {
 //    private KafkaTemplate stringTemplate;
     @Autowired
     private KafkaSendService kafkaSendService;
+    @Autowired
+    private com.nbh.wxprojectclient.plugin.dubbo.api.TestDubbo testDubbo;
 
     public static void main(String[] args) {
 //        SpringApplication.run(WxprojectClientApplication.class, args);
-//        kafkaProducerFactory.
         SpringApplication.run(WxprojectClientApplication.class, args).close();
     }
 
@@ -32,8 +35,9 @@ public class WxprojectClientApplication implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
+        testDubbo.test("nbh");
 //        stringTemplate.sendDefault("testDefault");
-        kafkaSendService.test1();
+//        kafkaSendService.test1();
 //        kafkaSendService.test2();
 //        kafkaSendService.test3();
     }

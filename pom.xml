@@ -43,7 +43,8 @@
         <module>wxproject-admin</module>
         <module>wxproject-swagger</module>
         <module>wxproject-client</module>
-        <module>wxproject-common</module>
+        <module>wxproject-service</module>
+        <module>wxproject-service-api</module>
     </modules>
 
     <build>
